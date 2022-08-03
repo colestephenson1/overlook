@@ -1,5 +1,4 @@
-
-bookings = [
+const bookings = [
 {
 id: "5fwrgu4i7k55hl6sz",
 userID: 9,
