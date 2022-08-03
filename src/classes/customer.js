@@ -3,6 +3,7 @@ class Customer {
   constructor(customer) {
     this.id = customer.id;
     this.name = customer.name;
+    this.amountSpent = 0;
   }
 
   returnAllBookings() {
@@ -10,10 +11,12 @@ class Customer {
   }
 
   returnPastBookings() {
+    let date = new Date().toJSON().slice(0, 10);
     return bookings.filter(booking => {
       if (this.id === booking.userID) {
-        let splitDate = booking.date.split('/').map(date => parseInt(date));
-        if (splitDate[0] <= 2022 && splitDate[1] <= 8  && splitDate[1] <= 3) {
+        let splitBookingDate = booking.date.split('/').map(date => parseInt(date));
+        let splitCurrentDate = date.split('-').map(date => parseInt(date));
+        if (splitCurrentDate[0] > splitBookingDate[0] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] > splitBookingDate[1] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] === splitBookingDate[1] && splitCurrentDate[2] > splitBookingDate[2]) {
           return true;
         }
       }
@@ -21,10 +24,12 @@ class Customer {
   }
 
   returnFutureBookings() {
+    let date = new Date().toJSON().slice(0, 10);
     return bookings.filter(booking => {
       if (this.id === booking.userID) {
-        let splitDate = booking.date.split('/').map(date => parseInt(date));
-        if (splitDate[0] === 2022 && splitDate[1] >= 8  && splitDate[1] >= 3 || splitDate[0] >= 2023 ) {
+        let splitCurrentDate = date.split('-').map(time => parseInt(time));
+        let splitBookingDate = booking.date.split('/').map(time => parseInt(time))
+        if (splitCurrentDate[0] < splitBookingDate[0] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] < splitBookingDate[1] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] === splitBookingDate[1] && splitCurrentDate[2] < splitBookingDate[2]) {
           return true;
         }
       }
