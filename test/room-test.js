@@ -1,4 +1,5 @@
-import { expect } from 'chai';
+import chai from 'chai';
+const expect = chai.expect;
 import Room from '../src/classes/room';
 
 describe('Room', () => {
