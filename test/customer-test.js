@@ -24,7 +24,6 @@ let splitCurrentDate;
 
   it('Should be able to return past bookings for a customer', () => {
     let pastBookings1 = customer.returnPastBookings();
-    console.log(pastBookings1)
     expect(pastBookings1.every(booking => booking.userID === 1)).to.equal(true)
     expect(pastBookings1[0].date).to.equal('2022/02/05')
     expect(pastBookings1[1].date).to.equal('2022/01/19')

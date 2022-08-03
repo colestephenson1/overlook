@@ -4,6 +4,7 @@ class Customer {
     this.id = customer.id;
     this.name = customer.name;
     this.amountSpent = 0;
+    this.seeFutureBookings = true;
   }
 
   returnAllBookings() {
