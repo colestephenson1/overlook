@@ -7,9 +7,22 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <main class='mass-container'>
+    <section class='header-container'>
+      <h1>Welcome to Overlook!</h1>
+    </section>
+    <section class='nav-bar'>
+      <p class='amount-spent'>Amount Spent</p>
+      <section class='check-dates-UI'>
+        <input class='dates-search-input' type='text' placeholder='Check Date to Book' id='homePageSearchBar'/>
+        <button class='check-dates-button'>Search!</button>
+      </section>
+    </section>
+    <section class='primary-container'>
+      <section class='future-bookings-container'></section>
+      <section class='past-bookings-container hidden'></section>
+    </section>
+  </main>
   <script src="bundle.js"></script>
 
 </body>
