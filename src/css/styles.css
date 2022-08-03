@@ -3,11 +3,19 @@ body {
   width: 100vw;
 }
 
-button {
+.check-dates-button {
   background-color: purple;
+  border-radius: 5px;
   color: white;
   height: 50%;
   width: 35%;
+}
+
+.toggle-bookings-button1, .toggle-bookings-button2{
+  background-color: purple;
+  border-radius: 5px;
+  color: white;
+  height: 7%
 }
 
 .mass-container {
@@ -33,7 +41,7 @@ button {
   justify-content: space-between;
   align-items: center;
   background-color: black;
-  height: 10%;
+  height: 7%;
   width: 100%;
 }
 
@@ -51,6 +59,7 @@ button {
 
 .primary-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: red;
@@ -59,6 +68,7 @@ button {
 }
 
 .future-bookings-container, .past-bookings-container {
+  display: grid;
   height: 95%;
   width: 95%;
   background-color: white;
