@@ -1,4 +1,5 @@
 import bookings from '../mockData/mock-bookings';
+import rooms from '../mockData/mock-rooms'
 
 class Customer {
   constructor(customer) {
@@ -36,6 +37,58 @@ class Customer {
         }
       }
     })
+  }
+
+  returnPastBookingRoomInfo() {
+    const pastBookings = this.returnPastBookings();
+    return pastBookings.reduce((array, booking) => {
+      rooms.forEach(room => {
+        if (booking.roomNumber === room.number) {
+          let yesOrNo;
+          if (room.bidet) {
+            yesOrNo = 'Yes'
+          } else {
+            yesOrNo = 'No'
+          }
+          let roomInfo = `
+          Date: ${booking.date},
+          Room: ${room.number},
+          Room Type: ${room.roomType},
+          Bidet: ${yesOrNo},
+          Bed Size: ${room.bedSize},
+          # of Beds: ${room.numBeds},
+          Cost Per Night: ${room.costPerNight}`
+          array.push(roomInfo)
+        }
+      })
+      return array
+    }, [])
+  }
+
+  returnFutureBookingRoomInfo() {
+    const pastBookings = this.returnFutureBookings();
+    return pastBookings.reduce((array, booking) => {
+      rooms.forEach(room => {
+        if (booking.roomNumber === room.number) {
+          let yesOrNo;
+          if (room.bidet) {
+            yesOrNo = 'Yes'
+          } else {
+            yesOrNo = 'No'
+          }
+          let roomInfo = `
+          Date: ${booking.date},
+          Room: ${room.number},
+          Room Type: ${room.roomType},
+          Bidet: ${yesOrNo},
+          Bed Size: ${room.bedSize},
+          # of Beds: ${room.numBeds},
+          Cost Per Night: ${room.costPerNight}`
+          array.push(roomInfo)
+        }
+      })
+      return array
+    }, [])
   }
 
 }
