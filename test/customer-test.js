@@ -15,6 +15,10 @@ let splitCurrentDate;
     splitCurrentDate = new Date().toJSON().slice(0, 10);
   })
 
+  it('Should be an instance of Customer', () => {
+    expect(customer).to.be.an.instanceOf(Customer);
+  })
+
   it('Should be able to return all bookings for each customer', () => {
     const bookingIDs1 = (customer.returnAllBookings()).map(booking => booking.userID)
     const bookingIDs2 = (customer2.returnAllBookings()).map(booking => booking.userID)
