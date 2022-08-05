@@ -33,7 +33,7 @@ function getPromiseData() {
     roomData = data[0].rooms;
     bookingsData = data[1].bookings;
     customerData = data[2].customers;
-    customer = new Customer(customerData[1]);
+    customer = new Customer(customerData[0]);
     hotel = new Hotel(roomData, bookingsData);
     seeFutureBookings()
   })
