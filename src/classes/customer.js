@@ -1,10 +1,11 @@
 import bookings from '../mockData/mock-bookings';
+
 class Customer {
   constructor(customer) {
     this.id = customer.id;
     this.name = customer.name;
     this.amountSpent = 0;
-    this.seeFutureBookings = true;
+    // this.seeFutureBookings = true;
   }
 
   returnAllBookings() {
