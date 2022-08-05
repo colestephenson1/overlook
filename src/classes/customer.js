@@ -50,14 +50,7 @@ class Customer {
           } else {
             yesOrNo = 'No'
           }
-          let roomInfo = `
-          Date: ${booking.date},
-          Room: ${room.number},
-          Room Type: ${room.roomType},
-          Bidet: ${yesOrNo},
-          Bed Size: ${room.bedSize},
-          # of Beds: ${room.numBeds},
-          Cost Per Night: ${room.costPerNight}`
+          let roomInfo = `Date: ${booking.date},\nRoom: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
           array.push(roomInfo)
         }
       })
@@ -76,14 +69,7 @@ class Customer {
           } else {
             yesOrNo = 'No'
           }
-          let roomInfo = `
-          Date: ${booking.date},
-          Room: ${room.number},
-          Room Type: ${room.roomType},
-          Bidet: ${yesOrNo},
-          Bed Size: ${room.bedSize},
-          # of Beds: ${room.numBeds},
-          Cost Per Night: ${room.costPerNight}`
+          let roomInfo = `Date: ${booking.date},\nRoom: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
           array.push(roomInfo)
         }
       })
