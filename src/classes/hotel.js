@@ -14,7 +14,7 @@ class Hotel {
     let date = new Date().toJSON().slice(0, 10);
     let splitCurrentDate = date.split('-').map(date => parseInt(date));
     let splitBookingDate = desiredDate.split('/').map(date => parseInt(date));
-    if (splitCurrentDate[0] > splitBookingDate[0] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] > splitBookingDate[1] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] === splitBookingDate[1] && splitCurrentDate[2] > splitBookingDate[2]) {
+    if (splitCurrentDate[0] > splitBookingDate[0] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] > splitBookingDate[1] || splitCurrentDate[0] === splitBookingDate[0] && splitCurrentDate[1] === splitBookingDate[1] && splitCurrentDate[2] > splitBookingDate[2] || desiredDate === '') {
       this.filteredRoomsByDate = null;
       return 'Sorry! Either this is a past date or no rooms are available. Please try again.'
     } else {

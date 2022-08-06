@@ -44,11 +44,9 @@ let splitCurrentDate;
     expect(futureBookings1[3].date).to.equal('2023/02/12')
   })
 
-  // it("Should be able return the room info for each of the customer's past bookings", () => {
-  //   let roomInfo = customer.returnPastBookingRoomInfo()
-  //   console.log(roomInfo[0])
-  //
-  //   expect(roomInfo[0]).to.equal(`Date: 2022/02/05,\nRoom: 12,\nRoom Type: single room,\nBidet: No,\nBed Size: twin,\n# of Beds: 2, \nCost Per Night: $172.09`)
-  // })
+  it("Should be able return the total amount a customer has spent on bookings.", () => {
+    expect(customer.returnTotalAmountSpent()).to.equal(8806)
+    expect(customer2.returnTotalAmountSpent()).to.equal(7557)
+  })
 
 })
