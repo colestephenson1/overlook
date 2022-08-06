@@ -77,6 +77,21 @@ class Customer {
     }, [])
   }
 
+  returnTotalAmountSpent() {
+    const allUserBookings = this.returnAllBookings()
+    const amount = allUserBookings.reduce((total, booking) => {
+        rooms.forEach(room => {
+          if (room.number === booking.roomNumber) {
+            total += room.costPerNight;
+          }
+        })
+      return total
+    }, 0)
+    let parsedAmount = parseInt(amount.toFixed(2))
+    this.amountSpent = parsedAmount;
+    return parsedAmount;
+  }
+
 }
 
 export default Customer;

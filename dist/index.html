@@ -14,7 +14,7 @@
     </section>
     <section class='nav-bar'>
       <p class='amount-spent'>Amount Spent: $0.00</p>
-      <p class='amount-spent'>Click the Button below to Toggle between your Past and Future Bookings!</p>
+      <p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
       <section class='check-dates-UI'>
         <input class='dates-search-input' type='text' placeholder='Check Date xxxx/xx/xx ' id='homePageSearchBar'/>
         <button class='check-dates-button'>Search!</button>
@@ -25,6 +25,14 @@
       <button class='toggle-bookings-button2 hidden'>See Future Bookings</button>
       <section class='future-bookings-container'></section>
       <section class='past-bookings-container hidden'></section>
+      <section class='search-room-input-box hidden'>
+        <section class='form-and-button'>
+          <input class='room-search-input' type='text' placeholder='Search by Room Type'>
+          <button class='search-room-type-button'>Search!</button>
+        </section>
+        <button class='home-button'>Go Home</button>
+      </section>
+      <section class='filtered-bookings-container hidden'></section>
     </section>
   </main>
   <script src="bundle.js"></script>
