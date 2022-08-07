@@ -188,39 +188,39 @@ function updateTotalSpent(roomNum) {
   amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`
 }
 
-function repopulateAvailableRooms() {
-  const availableRooms = hotel.showRoomsByDate(desiredDate)
-  desiredDate = searchByDateInput.value;
-  filteredContainer.innerHTML = '';
-  if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {
-    filteredContainer.innerHTML += `<p class='filtered-error-response'>${availableRooms}</p>`;
-    hide([searchRoomInputBox])
-  } else {
-    show([searchRoomInputBox])
-    const availableRoomStrings = availableRooms.reduce((array, room) => {
-        let yesOrNo;
-        if (room.bidet) {
-          yesOrNo = 'Yes'
-        } else {
-          yesOrNo = 'No'
-        }
-        let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
-        array.push(roomInfo)
-      return array
-    }, [])
-
-    availableRoomStrings.forEach(string => {
-      let parsedID = parseInt(string.substring(6, 9))
-      filteredContainer.innerHTML += `<section class ='booking-box' id=''>
-        <p class='booking-info'>${string}</p>
-        <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
-      </section>`
-      navBarInstructions.innerText = ''
-      navBarInstructions.innerText += 'Congrats! Your room has been booked! Click another green checkmark to book again.'
-    })
-
-  }
-}
+// function repopulateAvailableRooms() {
+//   const availableRooms = hotel.showRoomsByDate(desiredDate)
+//   desiredDate = searchByDateInput.value;
+//   filteredContainer.innerHTML = '';
+//   if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {
+//     filteredContainer.innerHTML += `<p class='filtered-error-response'>${availableRooms}</p>`;
+//     hide([searchRoomInputBox])
+//   } else {
+//     show([searchRoomInputBox])
+//     const availableRoomStrings = availableRooms.reduce((array, room) => {
+//         let yesOrNo;
+//         if (room.bidet) {
+//           yesOrNo = 'Yes'
+//         } else {
+//           yesOrNo = 'No'
+//         }
+//         let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
+//         array.push(roomInfo)
+//       return array
+//     }, [])
+//
+//     availableRoomStrings.forEach(string => {
+//       let parsedID = parseInt(string.substring(6, 9))
+//       filteredContainer.innerHTML += `<section class ='booking-box' id=''>
+//         <p class='booking-info'>${string}</p>
+//         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
+//       </section>`
+//       navBarInstructions.innerText = ''
+//       navBarInstructions.innerText += 'Congrats! Your room has been booked! Click another green checkmark to book again.'
+//     })
+//
+//   }
+// }
 
 // Functions to hide and show elements
 
