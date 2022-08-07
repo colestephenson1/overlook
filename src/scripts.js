@@ -6,6 +6,7 @@ import Hotel from './classes/hotel'
 
 
 //******** QUERY SELECTORS *********
+
 const amountSpent = document.querySelector('.amount-spent');
 const seeFutureBookingsButton = document.querySelector('.toggle-bookings-button2');
 const seePastBookingsButton = document.querySelector('.toggle-bookings-button1');
@@ -37,10 +38,9 @@ function getPromiseData() {
   Promise.all( [fetchData('rooms'), fetchData('bookings'), fetchData('customers')]).then(data => {
     roomData = data[0].rooms;
     bookingsData = data[1].bookings;
-    console.log(bookings)
     customerData = data[2].customers;
     customer = new Customer(customerData[1]);
-    hotel = new Hotel(roomData, bookingsData);
+    hotel = new Hotel(2, roomData, bookingsData);
     seeFutureBookings()
   })
 }
@@ -58,7 +58,7 @@ filteredContainer.addEventListener('click', checkForCheckmark)
 // ***** Functions *****
 
 function populatePastBookings() {
-  const bookingsWithRoomInfo = customer.returnPastBookingRoomInfo()
+  const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo()
   pastBookingsContainer.innerHTML  = '';
   let count = 0;
   bookingsWithRoomInfo.forEach(booking => {
@@ -74,11 +74,11 @@ function populatePastBookings() {
 
 function populateFutureBookings() {
   if (customer.amountSpent === 0) {
-    amountSpent.innerText = `Amount Spent: $${customer.returnTotalAmountSpent()}`;
+    amountSpent.innerText = `Amount Spent: $${hotel.returnTotalAmountSpent()}`;
   } else {
     amountSpent.innerText = `Amount Spent: $${customer.amountSpent}`;
   }
-  const bookingsWithRoomInfo = customer.returnFutureBookingRoomInfo();
+  const bookingsWithRoomInfo = hotel.returnFutureBookingRoomInfo();
   let count = 0;
   futureBookingsContainer.innerHTML  = '';
   bookingsWithRoomInfo.forEach(booking => {
@@ -167,9 +167,8 @@ function postBooking(roomNum) {
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
    headers: {'Content-type': 'application/json'},
-   body: JSON.stringify({userID: customer.id, date: desiredDate, roomNumber: parsedRoom})
+   body: JSON.stringify({userID: hotel.customer.id, date: desiredDate, roomNumber: parsedRoom})
   })
-  // .then(response => response.json())
   .then(response => {
   navBarInstructions.innerText = 'Room Booked! Click another checkmark to book another room on this day.';
   getPromiseData()
@@ -188,15 +187,6 @@ function updateTotalSpent(roomNum) {
   })
   amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`
 }
-
-// function updateBookingData() {
-//   return fetch('http://localhost:3001/api/v1/bookings')
-//   .then(response => response.json())
-//   .then(data => {
-//     bookingsData = data.bookings;
-//   })
-//   .catch(err => console.log(error))
-// }
 
 function repopulateAvailableRooms() {
   const availableRooms = hotel.showRoomsByDate(desiredDate)
