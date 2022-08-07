@@ -89,7 +89,7 @@ let hotel;
 
   it('should be able to tell the user if a desired room type is invalid', () => {
     hotel.showRoomsByDate('2023/01/08');
-    expect(hotel.showRoomsByType('thunderdome')).to.equal('Sorry! This is not a valid room type. Please try again.')
+    expect(hotel.showRoomsByType('thunderdome')).to.equal('Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.')
   })
 
 })
