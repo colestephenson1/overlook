@@ -19,7 +19,7 @@ class Hotel {
       return 'Sorry! Either this is a past date or no rooms are available. Please try again.'
     } else {
       const bookingsOnDate = bookings.filter(booking => booking.date === desiredDate).map(booking => booking.roomNumber);
-      const filteredRooms = rooms.filter(room => !bookingsOnDate.includes(room.number))
+      const filteredRooms = rooms.filter(room => !bookingsOnDate.includes(room.number));
       this.filteredRoomsByDate = filteredRooms;
       return filteredRooms;
     }

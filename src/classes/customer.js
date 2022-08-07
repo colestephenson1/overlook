@@ -1,5 +1,13 @@
-import bookings from '../mockData/mock-bookings';
 import rooms from '../mockData/mock-rooms'
+
+let bookings;
+
+fetch('http://localhost:3001/api/v1/bookings')
+  .then(response => response.json())
+  .then(data => {
+    bookings = data.bookings;
+  })
+  .catch(err => console.log(error))
 
 class Customer {
   constructor(customer) {
