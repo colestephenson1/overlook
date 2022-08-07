@@ -1,13 +1,6 @@
+// import bookings from '../mockData/mock-bookings';
 import rooms from '../mockData/mock-rooms'
-
 let bookings;
-
-fetch('http://localhost:3001/api/v1/bookings')
-  .then(response => response.json())
-  .then(data => {
-    bookings = data.bookings;
-  })
-  .catch(err => console.log(error))
 
 class Customer {
   constructor(customer) {
@@ -15,6 +8,14 @@ class Customer {
     this.name = customer.name;
     this.amountSpent = 0;
     // this.seeFutureBookings = true;
+  }
+
+  fetchCurrentBookings() {
+      return fetch(`http://localhost:3001/api/v1/bookings`)
+        .then(rsp => rsp.json() )
+        .then(data => bookings = data.bookingsData)
+        .catch(error => console.log(error));
+    }
   }
 
   returnAllBookings() {

@@ -37,6 +37,7 @@ function getPromiseData() {
   Promise.all( [fetchData('rooms'), fetchData('bookings'), fetchData('customers')]).then(data => {
     roomData = data[0].rooms;
     bookingsData = data[1].bookings;
+    console.log(bookings)
     customerData = data[2].customers;
     customer = new Customer(customerData[1]);
     hotel = new Hotel(roomData, bookingsData);
@@ -168,10 +169,10 @@ function postBooking(roomNum) {
    headers: {'Content-type': 'application/json'},
    body: JSON.stringify({userID: customer.id, date: desiredDate, roomNumber: parsedRoom})
   })
-  .then(response => response.json())
+  // .then(response => response.json())
   .then(response => {
   navBarInstructions.innerText = 'Room Booked! Click another checkmark to book another room on this day.';
-  updateData()
+  getPromiseData()
   updateTotalSpent(roomNum)
   })
 
@@ -188,15 +189,14 @@ function updateTotalSpent(roomNum) {
   amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`
 }
 
-function updateData() {
-  return fetch('http://localhost:3001/api/v1/bookings')
-  .then(response => response.json())
-  .then(data => {
-    bookingsData = data.bookings;
-    console.log(bookingsData)
-  })
-  .catch(err => console.log(error))
-}
+// function updateBookingData() {
+//   return fetch('http://localhost:3001/api/v1/bookings')
+//   .then(response => response.json())
+//   .then(data => {
+//     bookingsData = data.bookings;
+//   })
+//   .catch(err => console.log(error))
+// }
 
 function repopulateAvailableRooms() {
   const availableRooms = hotel.showRoomsByDate(desiredDate)
