@@ -20,7 +20,7 @@ let splitCurrentDate;
   })
 
   it('Should start with no amount spent before checking past bookings', () => {
-    expect(customer.amountSpent).to.equal(0)
+    expect(customer.amountSpent).to.equal(0);
   })
 
 })

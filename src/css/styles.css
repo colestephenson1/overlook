@@ -7,11 +7,19 @@ body {
   width: 100vw;
 }
 
-.check-dates-button, .search-room-type-button, .home-button {
+.check-dates-button, .search-room-type-button {
   background-color: #6174EA;
   border-radius: 5px;
   color: white;
   height: 50%;
+  width: 35%;
+}
+
+.home-button {
+  background-color: #6174EA;
+  border-radius: 5px;
+  color: white;
+  height: 19%;
   width: 35%;
 }
 
@@ -23,16 +31,17 @@ body {
 }
 
 .mass-container {
+  background-image: url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+  background-size: cover;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .header-container {
-  color: black;
   background-size: cover;
   background-image: linear-gradient(#78C9BA, #6174EA);
   display: flex;
@@ -55,9 +64,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: linear-gradient(#6174EA, #E5552F);
+  background-color: black;
   height: 7%;
   width: 100%;
+  opacity: 0.9;
 }
 
 .amount-spent, .check-dates-UI, .instructions {
@@ -73,8 +83,32 @@ body {
 }
 
 .filtered-error-response {
-  color: white;
+  color: red;
   font-size: 40px;
+  text-shadow: 1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000,
+    0px 1px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    1px 2px 0 #000,
+    -1px 2px 0 #000,
+    1px -2px 0 #000,
+    -1px -2px 0 #000,
+    2px 1px 0 #000,
+    -2px 1px 0 #000,
+    2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
 .primary-container {
@@ -82,13 +116,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(#E5552F, beige);
   height: 70%;
   width: 100%;
 }
 
 .future-bookings-container{
-  background-color: #E5552F;
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 7px 7px;
@@ -102,7 +134,6 @@ body {
 }
 
 .past-bookings-container, .filtered-bookings-container {
-  background-color: #E5552F;
   display: grid;
   grid-template-columns: auto auto auto auto;
   gap: 7px 7px;
@@ -129,6 +160,8 @@ body {
 }
 
 .search-room-input-box {
+  height: 200px;
+  width: 200px;
   display: flex;
   flex-direction: column;;
   justify-content: space-evenly;

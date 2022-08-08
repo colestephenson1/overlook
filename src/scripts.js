@@ -1,8 +1,9 @@
 //****** IMPORTS ********
+
 import './css/styles.css';
 import {fetchData} from './apiCalls';
-import Customer from './classes/customer'
-import Hotel from './classes/hotel'
+import Customer from './classes/customer';
+import Hotel from './classes/hotel';
 
 
 //******** QUERY SELECTORS *********
@@ -41,28 +42,31 @@ function getPromiseData() {
     customerData = data[2].customers;
     customer = new Customer(customerData[1]);
     hotel = new Hotel(2, roomData, bookingsData);
-    seeFutureBookings()
+    seeFutureBookings();
   })
 }
 
 // ***** Event Listeners ******
 
 window.addEventListener('load', getPromiseData);
-seePastBookingsButton.addEventListener('click', seePastBookings)
-seeFutureBookingsButton.addEventListener('click', seeFutureBookings)
-checkDatesButton.addEventListener('click', seeFilteredBookings)
-searchRoomTypeButton.addEventListener('click', populateFilteredRooms)
-homeButton.addEventListener('click', seeFutureBookings)
-filteredContainer.addEventListener('click', checkForCheckmark)
+seePastBookingsButton.addEventListener('click', seePastBookings);
+seeFutureBookingsButton.addEventListener('click', seeFutureBookings);
+checkDatesButton.addEventListener('click', seeFilteredBookings);
+searchRoomTypeButton.addEventListener('click', populateFilteredRooms);
+homeButton.addEventListener('click', seeUpdatedFutureBookings);
+filteredContainer.addEventListener('click', checkForCheckmark);
+
 
 // ***** Functions *****
 
+//Functions to populate the different containers
+
 function populatePastBookings() {
-  const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo()
+  const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo();
   pastBookingsContainer.innerHTML  = '';
   let count = 0;
   bookingsWithRoomInfo.forEach(booking => {
-    count++
+    count++;
     pastBookingsContainer.innerHTML += `
     <section class ='booking-box'>
       <p class='booking-info'>Booking ${count}</p>
@@ -80,6 +84,7 @@ function populateFutureBookings() {
   }
   const bookingsWithRoomInfo = hotel.returnFutureBookingRoomInfo();
   let count = 0;
+  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
   futureBookingsContainer.innerHTML  = '';
   bookingsWithRoomInfo.forEach(booking => {
     count++
@@ -92,68 +97,72 @@ function populateFutureBookings() {
 }
 
 function populateAvailableRooms() {
-  const availableRooms = hotel.showRoomsByDate(searchByDateInput.value)
-  desiredDate = searchByDateInput.value;
+  let rejoinedDate = searchByDateInput.value.split('-').join('/')
+  const availableRooms = hotel.showRoomsByDate(rejoinedDate)
+  desiredDate = rejoinedDate;
   filteredContainer.innerHTML = '';
   if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {
     filteredContainer.innerHTML += `<p class='filtered-error-response'>${availableRooms}</p>`;
-    hide([searchRoomInputBox])
+    show([searchRoomInputBox]);
+    hide([searchRoomTypeButton, searchByRoomTypeInput]);
   } else {
-    show([searchRoomInputBox])
+    show([searchRoomInputBox, searchRoomTypeButton, searchByRoomTypeInput])
     const availableRoomStrings = availableRooms.reduce((array, room) => {
         let yesOrNo;
         if (room.bidet) {
-          yesOrNo = 'Yes'
+          yesOrNo = 'Yes';
         } else {
-          yesOrNo = 'No'
+          yesOrNo = 'No';
         }
-        let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
-        array.push(roomInfo)
-      return array
+        let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`;
+        array.push(roomInfo);
+      return array;
     }, [])
 
     availableRoomStrings.forEach(string => {
-      let parsedID = parseInt(string.substring(6, 9))
+      let parsedID = parseInt(string.substring(6, 9));
       filteredContainer.innerHTML += `<section class ='booking-box' id=''>
         <p class='booking-info'>${string}</p>
         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
-      </section>`
-      navBarInstructions.innerText = ''
-      navBarInstructions.innerText += 'Click a green checkmark to book a room!'
+      </section>`;
+      navBarInstructions.innerText = '';
+      navBarInstructions.innerText += 'Click a green checkmark to book a room!';
     })
-
   }
 }
 
 function populateFilteredRooms() {
-  const filteredRooms = hotel.showRoomsByType(searchByRoomTypeInput.value)
+  const filteredRooms = hotel.showRoomsByType(searchByRoomTypeInput.value);
   filteredContainer.innerHTML = '';
   if (filteredRooms === 'Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.') {
+    navBarInstructions.innerText = '';
     filteredContainer.innerHTML += `<p class='filtered-error-response'>${filteredRooms}</p>`;
   } else {
+    navBarInstructions.innerText = 'Click a green checkmark to book a room!';
     const filteredRoomStrings = filteredRooms.reduce((array, room) => {
         let yesOrNo;
         if (room.bidet) {
-          yesOrNo = 'Yes'
+          yesOrNo = 'Yes';
         } else {
-          yesOrNo = 'No'
+          yesOrNo = 'No';
         }
-        let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
-        array.push(roomInfo)
+        let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`;
+        array.push(roomInfo);
       return array
     }, [])
 
     filteredRoomStrings.forEach(string => {
-      let parsedID = parseInt(string.substring(6, 9))
+      let parsedID = parseInt(string.substring(6, 9));
       filteredContainer.innerHTML += `<section class ='booking-box'>
         <p class='booking-info'>${string}</p>
         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
-      </section>`
+      </section>`;
     })
 
   }
 }
 
+// Function for our event.target
 
 function checkForCheckmark(event) {
   event.preventDefault();
@@ -162,65 +171,34 @@ function checkForCheckmark(event) {
   }
 }
 
+//Functions to post a booking to the local server and update total amount spent
+
 function postBooking(roomNum) {
+  let rejoinedDate = desiredDate.split('-').join('/');
   let parsedRoom = parseInt(roomNum);
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
    headers: {'Content-type': 'application/json'},
-   body: JSON.stringify({userID: hotel.customer.id, date: desiredDate, roomNumber: parsedRoom})
+   body: JSON.stringify({userID: hotel.customer.id, date: rejoinedDate, roomNumber: parsedRoom})
   })
   .then(response => {
-  navBarInstructions.innerText = 'Room Booked! Click another checkmark to book another room on this day.';
-  getPromiseData()
-  updateTotalSpent(roomNum)
+  navBarInstructions.innerText = 'Room Booked! Search for another day to book another room.';
+  getPromiseData();
+  updateTotalSpent(roomNum);
   })
 
 }
 
 function updateTotalSpent(roomNum) {
   roomData.forEach(room => {
-    let parsedNum = parseInt(room.number)
-    let parsedInput = parseInt(roomNum)
+    let parsedNum = parseInt(room.number);
+    let parsedInput = parseInt(roomNum);
     if(parsedNum === parsedInput) {
       customer.amountSpent += room.costPerNight;
     }
   })
-  amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`
+  amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`;
 }
-
-// function repopulateAvailableRooms() {
-//   const availableRooms = hotel.showRoomsByDate(desiredDate)
-//   desiredDate = searchByDateInput.value;
-//   filteredContainer.innerHTML = '';
-//   if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {
-//     filteredContainer.innerHTML += `<p class='filtered-error-response'>${availableRooms}</p>`;
-//     hide([searchRoomInputBox])
-//   } else {
-//     show([searchRoomInputBox])
-//     const availableRoomStrings = availableRooms.reduce((array, room) => {
-//         let yesOrNo;
-//         if (room.bidet) {
-//           yesOrNo = 'Yes'
-//         } else {
-//           yesOrNo = 'No'
-//         }
-//         let roomInfo = `Room: ${room.number},\nRoom Type: ${room.roomType},\nBidet: ${yesOrNo},\nBed Size: ${room.bedSize},\n# of Beds: ${room.numBeds}, \nCost Per Night: $${room.costPerNight}`
-//         array.push(roomInfo)
-//       return array
-//     }, [])
-//
-//     availableRoomStrings.forEach(string => {
-//       let parsedID = parseInt(string.substring(6, 9))
-//       filteredContainer.innerHTML += `<section class ='booking-box' id=''>
-//         <p class='booking-info'>${string}</p>
-//         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
-//       </section>`
-//       navBarInstructions.innerText = ''
-//       navBarInstructions.innerText += 'Congrats! Your room has been booked! Click another green checkmark to book again.'
-//     })
-//
-//   }
-// }
 
 // Functions to hide and show elements
 
@@ -235,6 +213,11 @@ function seeFutureBookings() {
   show([seePastBookingsButton, futureBookingsContainer]);
   hide([seeFutureBookingsButton, pastBookingsContainer, filteredContainer,  searchRoomInputBox]);
   populateFutureBookings();
+}
+
+function seeUpdatedFutureBookings() {
+  seeFutureBookings();
+  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
 }
 
 function seeFilteredBookings() {
