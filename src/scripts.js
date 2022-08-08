@@ -22,7 +22,7 @@ const searchRoomTypeButton = document.querySelector('.search-room-type-button');
 const searchRoomInputBox= document.querySelector('.search-room-input-box');
 const searchByRoomTypeInput= document.querySelector('.room-search-input');
 const homeButton = document.querySelector('.home-button');
-
+const instructionsBox = document.querySelector('.instructions-box');
 
 //******* GLOBAL VARIABLES *******
 
@@ -63,7 +63,9 @@ filteredContainer.addEventListener('click', checkForCheckmark);
 
 function populatePastBookings() {
   const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo();
-  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
+  instructionsBox.innerHTML = ''
+  instructionsBox.innerHTML += `<p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
+  <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>`;
   pastBookingsContainer.innerHTML  = '';
   let count = 0;
   bookingsWithRoomInfo.forEach(booking => {
@@ -71,7 +73,7 @@ function populatePastBookings() {
     pastBookingsContainer.innerHTML += `
     <section class ='booking-box'>
       <p class='booking-info'>Booking ${count}</p>
-      <p class='booking-info'>${booking}</p>
+      <button class='booking-info'>${booking}</button>
     </section>`
   })
 }
@@ -91,7 +93,7 @@ function populateFutureBookings() {
     futureBookingsContainer.innerHTML += `
     <section class ='booking-box'>
       <p class='booking-info'>Booking ${count}</p>
-      <p class='booking-info'>${booking}</p>
+      <button class='booking-info'>${booking}</button>
     </section>`
   })
 }
@@ -121,12 +123,12 @@ function populateAvailableRooms() {
 
     availableRoomStrings.forEach(string => {
       let parsedID = parseInt(string.substring(6, 9));
-      filteredContainer.innerHTML += `<section class ='booking-box' id=''>
-        <p class='booking-info'>${string}</p>
+      filteredContainer.innerHTML += `<section class='booking-box'>
+        <button class='booking-info'>${string}</button>
         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
       </section>`;
-      navBarInstructions.innerText = '';
-      navBarInstructions.innerText += 'Click a green checkmark to book a room!';
+      instructionsBox.innerHTML = '';
+      instructionsBox.innerHTML += '<p class="instructions">Click a green checkmark to book a room!</p>';
     })
   }
 }
@@ -135,10 +137,11 @@ function populateFilteredRooms() {
   const filteredRooms = hotel.showRoomsByType(searchByRoomTypeInput.value);
   filteredContainer.innerHTML = '';
   if (filteredRooms === 'Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.') {
-    navBarInstructions.innerText = '';
+    instructionsBox.innerHTML = '';
     filteredContainer.innerHTML += `<p class='filtered-error-response'>${filteredRooms}</p>`;
   } else {
-    navBarInstructions.innerText = 'Click a green checkmark to book a room!';
+    instructionsBox.innerHTML = '';
+    instructionsBox.innerHTML = '<p class="instructions">Click a green checkmark to book a room!</p>';
     const filteredRoomStrings = filteredRooms.reduce((array, room) => {
         let yesOrNo;
         if (room.bidet) {
@@ -153,8 +156,8 @@ function populateFilteredRooms() {
 
     filteredRoomStrings.forEach(string => {
       let parsedID = parseInt(string.substring(6, 9));
-      filteredContainer.innerHTML += `<section class ='booking-box'>
-        <p class='booking-info'>${string}</p>
+      filteredContainer.innerHTML += `<section class='booking-box'>
+        <button class='booking-info'>${string}</button>
         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
       </section>`;
     })
@@ -182,7 +185,8 @@ function postBooking(roomNum) {
    body: JSON.stringify({userID: hotel.customer.id, date: rejoinedDate, roomNumber: parsedRoom})
   })
   .then(response => {
-  navBarInstructions.innerText = 'Room Booked! Search for another day to book another room.';
+    instructionsBox.innerHTML = '';
+  instructionsBox.innerHTML += '<p class="instructions">Room Booked! Search for another day to book another room.</p>';
   getPromiseData();
   updateTotalSpent(roomNum);
   })
@@ -217,7 +221,9 @@ function seeFutureBookings() {
 
 function seeUpdatedFutureBookings() {
   seeFutureBookings();
-  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
+  instructionsBox.innerHTML = ''
+  instructionsBox.innerHTML += `<p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
+  <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>`;
 }
 
 function seeFilteredBookings() {

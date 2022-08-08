@@ -13,11 +13,16 @@
       <img class ='pip-boy' src='./assets/pip-boy.png' alt='smiling-man-thumbs-up'>
     </section>
     <section class='nav-bar'>
-      <p class='amount-spent'>Amount Spent: $0.00</p>
-      <p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!</p>
+      <div tabindex="0" class='amount-box'>
+        <p class='amount-spent'>Amount Spent: $0.00</p>
+      </div>
+      <div tabindex="0" class='instructions-box'>
+        <p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
+        <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>
+      </div>
       <section class='check-dates-UI'>
         <input class='dates-search-input' type='date' placeholder='Check Date xxxx/xx/xx ' id='homePageSearchBar'/>
-        <button class='check-dates-button'>Search!</button>
+        <button class='check-dates-button'>Search Date!</button>
       </section>
     </section>
     <section class='primary-container'>
