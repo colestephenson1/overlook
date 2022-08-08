@@ -53,8 +53,9 @@ seePastBookingsButton.addEventListener('click', seePastBookings);
 seeFutureBookingsButton.addEventListener('click', seeFutureBookings);
 checkDatesButton.addEventListener('click', seeFilteredBookings);
 searchRoomTypeButton.addEventListener('click', populateFilteredRooms);
-homeButton.addEventListener('click', seeFutureBookings);
+homeButton.addEventListener('click', seeUpdatedFutureBookings);
 filteredContainer.addEventListener('click', checkForCheckmark);
+
 
 // ***** Functions *****
 
@@ -83,6 +84,7 @@ function populateFutureBookings() {
   }
   const bookingsWithRoomInfo = hotel.returnFutureBookingRoomInfo();
   let count = 0;
+  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
   futureBookingsContainer.innerHTML  = '';
   bookingsWithRoomInfo.forEach(booking => {
     count++
@@ -95,8 +97,9 @@ function populateFutureBookings() {
 }
 
 function populateAvailableRooms() {
-  const availableRooms = hotel.showRoomsByDate(searchByDateInput.value)
-  desiredDate = searchByDateInput.value;
+  let rejoinedDate = searchByDateInput.value.split('-').join('/')
+  const availableRooms = hotel.showRoomsByDate(rejoinedDate)
+  desiredDate = rejoinedDate;
   filteredContainer.innerHTML = '';
   if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {
     filteredContainer.innerHTML += `<p class='filtered-error-response'>${availableRooms}</p>`;
@@ -132,8 +135,10 @@ function populateFilteredRooms() {
   const filteredRooms = hotel.showRoomsByType(searchByRoomTypeInput.value);
   filteredContainer.innerHTML = '';
   if (filteredRooms === 'Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.') {
+    navBarInstructions.innerText = '';
     filteredContainer.innerHTML += `<p class='filtered-error-response'>${filteredRooms}</p>`;
   } else {
+    navBarInstructions.innerText = 'Click a green checkmark to book a room!';
     const filteredRoomStrings = filteredRooms.reduce((array, room) => {
         let yesOrNo;
         if (room.bidet) {
@@ -169,11 +174,12 @@ function checkForCheckmark(event) {
 //Functions to post a booking to the local server and update total amount spent
 
 function postBooking(roomNum) {
+  let rejoinedDate = desiredDate.split('-').join('/');
   let parsedRoom = parseInt(roomNum);
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
    headers: {'Content-type': 'application/json'},
-   body: JSON.stringify({userID: hotel.customer.id, date: desiredDate, roomNumber: parsedRoom})
+   body: JSON.stringify({userID: hotel.customer.id, date: rejoinedDate, roomNumber: parsedRoom})
   })
   .then(response => {
   navBarInstructions.innerText = 'Room Booked! Search for another day to book another room.';
@@ -207,6 +213,11 @@ function seeFutureBookings() {
   show([seePastBookingsButton, futureBookingsContainer]);
   hide([seeFutureBookingsButton, pastBookingsContainer, filteredContainer,  searchRoomInputBox]);
   populateFutureBookings();
+}
+
+function seeUpdatedFutureBookings() {
+  seeFutureBookings();
+  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
 }
 
 function seeFilteredBookings() {
