@@ -63,6 +63,7 @@ filteredContainer.addEventListener('click', checkForCheckmark);
 
 function populatePastBookings() {
   const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo();
+  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
   pastBookingsContainer.innerHTML  = '';
   let count = 0;
   bookingsWithRoomInfo.forEach(booking => {
@@ -84,7 +85,6 @@ function populateFutureBookings() {
   }
   const bookingsWithRoomInfo = hotel.returnFutureBookingRoomInfo();
   let count = 0;
-  navBarInstructions.innerText = 'Click the Button below to Toggle between your Past and Future Bookings! Or, Search for a Date to Book with the Button on the Right!';
   futureBookingsContainer.innerHTML  = '';
   bookingsWithRoomInfo.forEach(booking => {
     count++
