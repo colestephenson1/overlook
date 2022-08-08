@@ -9,7 +9,7 @@
 <body>
   <main class='mass-container'>
     <section class='header-container'>
-      <h1>Welcome to Overlook!</h1>
+      <h1 class='user-welcome'>Welcome to Overlook!</h1>
       <img class ='pip-boy' src='./assets/pip-boy.png' alt='smiling-man-thumbs-up'>
     </section>
     <section class='nav-bar'>
@@ -21,14 +21,22 @@
         <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>
       </div>
       <section class='check-dates-UI'>
-        <input class='dates-search-input' type='date' placeholder='Check Date xxxx/xx/xx ' id='homePageSearchBar'/>
+        <input class='dates-search-input' type='date' id='homePageSearchBar'/>
         <button class='check-dates-button'>Search Date!</button>
       </section>
     </section>
     <section class='primary-container'>
-      <button class='toggle-bookings-button1'>See Past Bookings</button>
+      <button class='toggle-bookings-button1 hidden'>See Past Bookings</button>
       <button class='toggle-bookings-button2 hidden'>See Future Bookings</button>
-      <section class='future-bookings-container'></section>
+      <section class='login-container'>
+        <section class='login-credentials-box'>
+          <p class='login-greeting'>Hello! Please Enter your Username and Password to Login.</p>
+          <input class='username-input' type='text' placeholder='Username'/>
+          <input class='password-input' type='text' placeholder='Password'/>
+          <button class='login-button'>Submit!</button>
+        </section>
+      </section>
+      <section class='future-bookings-container hidden'></section>
       <section class='past-bookings-container hidden'></section>
       <section class='search-room-input-box hidden'>
         <section class='form-and-button'>

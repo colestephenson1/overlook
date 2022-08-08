@@ -23,6 +23,12 @@ const searchRoomInputBox= document.querySelector('.search-room-input-box');
 const searchByRoomTypeInput= document.querySelector('.room-search-input');
 const homeButton = document.querySelector('.home-button');
 const instructionsBox = document.querySelector('.instructions-box');
+const loginContainer = document.querySelector('.login-container');
+const usernameInput = document.querySelector('.username-input');
+const passwordInput = document.querySelector('.password-input');
+const loginButton = document.querySelector('.login-button');
+const userWelcome = document.querySelector('.user-welcome');
+
 
 //******* GLOBAL VARIABLES *******
 
@@ -42,7 +48,6 @@ function getPromiseData() {
     customerData = data[2].customers;
     customer = new Customer(customerData[1]);
     hotel = new Hotel(2, roomData, bookingsData);
-    seeFutureBookings();
   })
 }
 
@@ -55,7 +60,7 @@ checkDatesButton.addEventListener('click', seeFilteredBookings);
 searchRoomTypeButton.addEventListener('click', populateFilteredRooms);
 homeButton.addEventListener('click', seeUpdatedFutureBookings);
 filteredContainer.addEventListener('click', checkForCheckmark);
-
+loginButton.addEventListener('click', login)
 
 // ***** Functions *****
 
@@ -161,7 +166,6 @@ function populateFilteredRooms() {
         <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
       </section>`;
     })
-
   }
 }
 
@@ -187,10 +191,8 @@ function postBooking(roomNum) {
   .then(response => {
     instructionsBox.innerHTML = '';
   instructionsBox.innerHTML += '<p class="instructions">Room Booked! Search for another day to book another room.</p>';
-  getPromiseData();
-  updateTotalSpent(roomNum);
+  getPromiseData2(roomNum);
   })
-
 }
 
 function updateTotalSpent(roomNum) {
@@ -198,14 +200,52 @@ function updateTotalSpent(roomNum) {
     let parsedNum = parseInt(room.number);
     let parsedInput = parseInt(roomNum);
     if(parsedNum === parsedInput) {
-      customer.amountSpent += room.costPerNight;
+      hotel.amountSpent = hotel.amountSpent += room.costPerNight;
     }
   })
-  amountSpent.innerText = `Amount Spent: $${parseInt(customer.amountSpent.toFixed(2))}`;
+  amountSpent.innerText = `Amount Spent: $${parseInt(hotel.returnTotalAmountSpent().toFixed(2))}`;
+}
+
+//Functions for logging in
+
+function login() {
+  customerData.forEach(customer => {
+    let customerID = parseInt(usernameInput.value.substring(8, 10));
+    let reqCustomerString = usernameInput.value.substring(0, 8);
+    if (reqCustomerString === 'customer' && customerID === customer.id && passwordInput.value === 'overlook2021' ) {
+      hotel = new Hotel(customer.id - 1, roomData, bookingsData);
+      customer = new Customer(customerData[customer.id - 1]);
+      seeFutureBookings();
+      greetCustomer(customer);
+    }
+  })
+}
+
+function getPromiseData2(roomNum) {
+  Promise.all( [fetchData('rooms'), fetchData('bookings'), fetchData('customers')]).then(data => {
+    roomData = data[0].rooms;
+    bookingsData = data[1].bookings;
+    customerData = data[2].customers;
+    customerData.forEach(customer => {
+      let customerID = parseInt(usernameInput.value.substring(8, 10));
+      let reqCustomerString = usernameInput.value.substring(0, 8);
+      if (reqCustomerString === 'customer' && customerID === customer.id && passwordInput.value === 'overlook2021' ) {
+        hotel = new Hotel(customer.id - 1, roomData, bookingsData);
+        seeFutureBookings();
+        greetCustomer(customer);
+        updateTotalSpent(roomNum)
+      }
+    })
+  })
+}
+
+
+function greetCustomer(customer) {
+  userWelcome.innerText = '';
+  userWelcome.innerText = `Welcome to Overlook, ${customer.name}!`;
 }
 
 // Functions to hide and show elements
-
 
 function seePastBookings() {
   hide([seePastBookingsButton, futureBookingsContainer, filteredContainer, searchRoomInputBox]);
@@ -215,7 +255,7 @@ function seePastBookings() {
 
 function seeFutureBookings() {
   show([seePastBookingsButton, futureBookingsContainer]);
-  hide([seeFutureBookingsButton, pastBookingsContainer, filteredContainer,  searchRoomInputBox]);
+  hide([seeFutureBookingsButton, pastBookingsContainer, filteredContainer,  searchRoomInputBox, loginContainer]);
   populateFutureBookings();
 }
 

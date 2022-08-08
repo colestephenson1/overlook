@@ -10,6 +10,7 @@ class Hotel {
     this.customer = customers[index];
     this.filteredRoomsByDate = null;
     this.filteredRoomsByType = null;
+    this.amountSpent = 0;
   }
 
   returnAllBookings() {
