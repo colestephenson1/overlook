@@ -6,6 +6,8 @@
 
 Welcome to Overlook! Within this application, a user will be able to login with a given set of credentials. A user will be greeted, be able to see old bookings, upcoming bookings, available rooms on future dates, book rooms, and more. 
 
+![2022-08-09 10 20 51](https://user-images.githubusercontent.com/102827145/183705522-17ad6f37-5f82-4473-9552-b25b7e47e5ad.gif)
+
 ## Learning Goals
 Use TDD to drive the design of the application
 Separate Class-logic code from DOM-related code
@@ -33,6 +35,7 @@ Use object and array prototype methods to perform all tasks required.
 
 
 ## Technologies Used
+
 
 - ES6 Javascript
 - CSS
