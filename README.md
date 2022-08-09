@@ -9,10 +9,10 @@ Welcome to Overlook! Within this application, a user will be able to login with 
 ![2022-08-09 10 20 51](https://user-images.githubusercontent.com/102827145/183705522-17ad6f37-5f82-4473-9552-b25b7e47e5ad.gif)
 
 ## Learning Goals
-Use TDD to drive the design of the application
-Separate Class-logic code from DOM-related code
-Create a robust test suite that thoroughly tests all functionality
-Use object and array prototype methods to perform all tasks required.
+- Use TDD to drive the design of the application
+- Separate Class-logic code from DOM-related code
+- Create a robust test suite that thoroughly tests all functionality
+- Use object and array prototype methods to perform all tasks required.
 
 ## Local Set Up Instructions
 
