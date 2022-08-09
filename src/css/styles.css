@@ -182,7 +182,7 @@ h1 {
 .past-bookings-container, .filtered-bookings-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  gap: 7px 7px;
+  gap: 40px 20px;
   margin: 2vh 4vw 2vh 4vw;
   align-items: center;
   justify-content: space-evenly;

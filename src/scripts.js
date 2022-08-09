@@ -27,6 +27,7 @@ const loginContainer = document.querySelector('.login-container');
 const usernameInput = document.querySelector('.username-input');
 const passwordInput = document.querySelector('.password-input');
 const loginButton = document.querySelector('.login-button');
+const loginGreeting = document.querySelector('.login-greeting');
 const userWelcome = document.querySelector('.user-welcome');
 
 
@@ -209,6 +210,7 @@ function updateTotalSpent(roomNum) {
 //Functions for logging in
 
 function login() {
+  console.log(usernameInput.value)
   customerData.forEach(customer => {
     let customerID = parseInt(usernameInput.value.substring(8, 10));
     let reqCustomerString = usernameInput.value.substring(0, 8);
@@ -217,6 +219,12 @@ function login() {
       customer = new Customer(customerData[customer.id - 1]);
       seeFutureBookings();
       greetCustomer(customer);
+    } else if (usernameInput.value === '' || passwordInput.value === '') {
+      loginGreeting.innerText = 'Error: Please fill out the required fields and resubmit.';
+    } else if (reqCustomerString !== 'customer' || customerID > 50 || isNaN(customerID)) {
+      loginGreeting.innerText = 'Error: Invalid Username.'
+    } else if (passwordInput.value !== 'overlook2021') {
+      loginGreeting.innerText = 'Error: Invalid Password.'
     }
   })
 }
