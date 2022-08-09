@@ -8,6 +8,8 @@ body {
   width: 100vw;
 }
 
+/* Header Section */
+
 h1 {
   font-size: 80px;
   text-shadow: 1px 1px 0 #FFF,
@@ -36,61 +38,7 @@ h1 {
     -2px -1px 0 #FFF;
 }
 
-.check-dates-button, .search-room-type-button {
-  background-color: #800020;
-  border-radius: 5px;
-  color: white;
-  height: 50%;
-  width: 35%;
-}
-
-.home-button {
-  background-color: #800020;
-  border-radius: 5px;
-  color: white;
-  height: 19%;
-  width: 35%;
-}
-
-.toggle-bookings-button1, .toggle-bookings-button2,  .login-button {
-  background-color: #800020;
-  border-radius: 5px;
-  color: white;
-  height: 7%
-}
-
-.mass-container {
-  background-image: url("https://images.unsplash.com/photo-1606186193539-837a478be1aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-container {
-  background-size: cover;
-  background-color: #800020;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20%;
-  width: 100%;
-  opacity: 0.9;
-}
-
-.pip-boy {
-  height: 100px;
-}
-
-.checkmark {
-  height: 50px;
-  width: 50px;
-}
-
-.amount-box{
+.amount-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,79 +72,7 @@ h1 {
   width: 15%;
 }
 
-
-.filtered-error-response {
-  color: red;
-  font-size: 40px;
-  text-shadow: 1px 1px 0 #FFF,
-    -1px 1px 0 #FFF,
-    1px -1px 0 #FFF,
-    -1px -1px 0 #FFF,
-    0px 1px 0 #FFF,
-    0px -1px 0 #FFF,
-    -1px 0px 0 #FFF,
-    1px 0px 0 #FFF,
-    2px 2px 0 #FFF,
-    -2px 2px 0 #FFF,
-    2px -2px 0 #FFF,
-    -2px -2px 0 #FFF,
-    0px 2px 0 #FFF,
-    0px -2px 0 #FFF,
-    -2px 0px 0 #FFF,
-    2px 0px 0 #FFF,
-    1px 2px 0 #FFF,
-    -1px 2px 0 #FFF,
-    1px -2px 0 #FFF,
-    -1px -2px 0 #FFF,
-    2px 1px 0 #FFF,
-    -2px 1px 0 #FFF,
-    2px -1px 0 #FFF,
-    -2px -1px 0 #FFF;
-}
-
-.primary-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 70%;
-  width: 100%;
-}
-
-.future-bookings-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 40px 20px;
-  margin: 2vh 4vw 2vh 4vw;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 95%;
-  width: 95%;
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
-
-.past-bookings-container, .filtered-bookings-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 40px 20px;
-  margin: 2vh 4vw 2vh 4vw;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 95%;
-  width: 95%;
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
-
-.login-container {
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 95%;
-  width: 95%;
-}
+/* Login */
 
 .login-credentials-box {
   text-shadow: 1px 1px 0 #FFF,
@@ -229,6 +105,89 @@ h1 {
   justify-content: center;
 }
 
+/* Buttons */
+
+.check-dates-button, .search-room-type-button {
+  height: 50%;
+  width: 35%;
+}
+
+.home-button {
+  height: 19%;
+  width: 35%;
+}
+
+.toggle-bookings-button1, .toggle-bookings-button2, .login-button {
+  height: 7%;
+}
+
+.check-dates-button, .search-room-type-button, .home-button, .toggle-bookings-button1, .toggle-bookings-button2, .login-button {
+  background-color: #800020;
+  border-radius: 5px;
+  color: white;
+}
+
+/* Containers */
+
+.mass-container {
+  background-image: url("https://images.unsplash.com/photo-1606186193539-837a478be1aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-container {
+  background-size: cover;
+  background-color: #800020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  width: 100%;
+  opacity: 0.9;
+}
+
+
+.primary-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+}
+
+.login-container {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.past-bookings-container, .filtered-bookings-container, .future-bookings-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 40px 20px;
+  margin: 2vh 4vw 2vh 4vw;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 95%;
+  width: 95%;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.past-bookings-container, .filtered-bookings-container, .future-bookings-container , .login-container {
+  height: 95%;
+  width: 95%;
+}
+
+/* Booking boxes that populate the containers */
+
 .booking-box {
   display: flex;
   flex-direction: column;
@@ -246,6 +205,44 @@ h1 {
   text-align: center;
 }
 
+.checkmark {
+  height: 50px;
+  width: 50px;
+}
+
+/* Error response */
+
+.filtered-error-response {
+  color: red;
+  font-size: 40px;
+  text-shadow: 1px 1px 0 #FFF,
+    -1px 1px 0 #FFF,
+    1px -1px 0 #FFF,
+    -1px -1px 0 #FFF,
+    0px 1px 0 #FFF,
+    0px -1px 0 #FFF,
+    -1px 0px 0 #FFF,
+    1px 0px 0 #FFF,
+    2px 2px 0 #FFF,
+    -2px 2px 0 #FFF,
+    2px -2px 0 #FFF,
+    -2px -2px 0 #FFF,
+    0px 2px 0 #FFF,
+    0px -2px 0 #FFF,
+    -2px 0px 0 #FFF,
+    2px 0px 0 #FFF,
+    1px 2px 0 #FFF,
+    -1px 2px 0 #FFF,
+    1px -2px 0 #FFF,
+    -1px -2px 0 #FFF,
+    2px 1px 0 #FFF,
+    -2px 1px 0 #FFF,
+    2px -1px 0 #FFF,
+    -2px -1px 0 #FFF;
+}
+
+
+/* The inputs to search by room type */
 
 .search-room-input-box {
   height: 200px;
@@ -262,6 +259,8 @@ h1 {
   align-items: center;
   height: 55px;
 }
+
+/* Hidden */
 
 .hidden {
   display: none;
