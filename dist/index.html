@@ -8,11 +8,10 @@
 </head>
 <body>
   <main class='mass-container'>
-    <section class='header-container'>
-      <h1 class='user-welcome'>Welcome to Overlook!</h1>
-      <img class ='pip-boy' src='./assets/pip-boy.png' alt='smiling-man-thumbs-up'>
+    <section role='banner' class='header-container'>
+      <h1 tabindex="0" class='user-welcome'>Welcome to Overlook!</h1>
     </section>
-    <section class='nav-bar'>
+    <section class='nav-bar hidden'>
       <div tabindex="0" class='amount-box'>
         <p class='amount-spent'>Amount Spent: $0.00</p>
       </div>
@@ -30,22 +29,22 @@
       <button class='toggle-bookings-button2 hidden'>See Future Bookings</button>
       <section class='login-container'>
         <section class='login-credentials-box'>
-          <p class='login-greeting'>Hello! Please Enter your Username and Password to Login.</p>
+          <p tabindex="0" class='login-greeting'>Hello! Please Enter your Username and Password to Login.</p>
           <input class='username-input' type='text' placeholder='Username'/>
           <input class='password-input' type='text' placeholder='Password'/>
           <button class='login-button'>Submit!</button>
         </section>
       </section>
-      <section class='future-bookings-container hidden'></section>
-      <section class='past-bookings-container hidden'></section>
+      <section role='grid' class='future-bookings-container hidden'></section>
+      <section role='grid' class='past-bookings-container hidden'></section>
       <section class='search-room-input-box hidden'>
-        <section class='form-and-button'>
+        <section role='form' class='form-and-button'>
           <input class='room-search-input' type='text' placeholder='Search by Room Type'>
           <button class='search-room-type-button'>Search!</button>
         </section>
         <button class='home-button'>Go Home</button>
       </section>
-      <section class='filtered-bookings-container hidden'></section>
+      <section role='grid' class='filtered-bookings-container hidden'></section>
     </section>
   </main>
   <script src="bundle.js"></script>
