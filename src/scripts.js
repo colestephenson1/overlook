@@ -51,6 +51,23 @@ function getPromiseData() {
   })
 }
 
+function getPromiseData2(roomNum) {
+  Promise.all( [fetchData('rooms'), fetchData('bookings'), fetchData('customers')]).then(data => {
+    roomData = data[0].rooms;
+    bookingsData = data[1].bookings;
+    customerData = data[2].customers;
+    customerData.forEach(customer => {
+      let customerID = parseInt(usernameInput.value.substring(8, 10));
+      let reqCustomerString = usernameInput.value.substring(0, 8);
+      if (reqCustomerString === 'customer' && customerID === customer.id) {
+        hotel = new Hotel(customer.id - 1, roomData, bookingsData);
+        seeFutureBookings();
+        updateTotalSpent(roomNum)
+      }
+    })
+  })
+}
+
 // ***** Event Listeners ******
 
 window.addEventListener('load', getPromiseData);
@@ -227,29 +244,6 @@ function login() {
   })
 }
 
-// function logout () {
-//   hide([navBar, seePastBookingsButton, seeFutureBookingsButton, futureBookingsContainer, filteredContainer, searchRoomInputBox, pastBookingsContainer])
-//   show([loginContainer])
-// }
-
-function getPromiseData2(roomNum) {
-  Promise.all( [fetchData('rooms'), fetchData('bookings'), fetchData('customers')]).then(data => {
-    roomData = data[0].rooms;
-    bookingsData = data[1].bookings;
-    customerData = data[2].customers;
-    customerData.forEach(customer => {
-      let customerID = parseInt(usernameInput.value.substring(8, 10));
-      let reqCustomerString = usernameInput.value.substring(0, 8);
-      if (reqCustomerString === 'customer' && customerID === customer.id) {
-        hotel = new Hotel(customer.id - 1, roomData, bookingsData);
-        seeFutureBookings();
-        updateTotalSpent(roomNum)
-      }
-    })
-  })
-}
-
-
 function greetCustomer(customer) {
   userWelcome.innerText = '';
   userWelcome.innerText = `Welcome to Overlook, ${customer.name}!`;
@@ -271,7 +265,7 @@ function seeFutureBookings() {
 
 function seeUpdatedFutureBookings() {
   seeFutureBookings();
-  instructionsBox.innerHTML = ''
+  instructionsBox.innerHTML = '';
   instructionsBox.innerHTML += `<p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
   <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>`;
 }
