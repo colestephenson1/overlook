@@ -132,7 +132,7 @@ function populateAvailableRooms() {
       let parsedID = parseInt(string.substring(6, 9));
       filteredContainer.innerHTML += `<section role='gridcell' class='booking-box'>
         <p tabindex='0' class='booking-info'>${string}</p>
-        <img tabindex='0' class='checkmark' id=${parsedID} src='./assets/checkmark.png' alt='green-checkmark-to-click'
+        <input type="image" src='./assets/checkmark.png' name="checkmark" class="checkmark" id=${parsedID}/>
       </section>`;
       instructionsBox.innerHTML = '';
       instructionsBox.innerHTML += '<p tabindex="0" class="instructions">Click a green checkmark to book a room!</p>';
@@ -165,7 +165,7 @@ function populateFilteredRooms() {
       let parsedID = parseInt(string.substring(6, 9));
       filteredContainer.innerHTML += `<section role='gridcell' class='booking-box'>
         <p tabindex='0' class='booking-info'>${string}</p>
-        <img tabindex='0' class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
+        <input type="image" src='./assets/checkmark.png' name="checkmark" class="checkmark" id=${parsedID}/>
       </section>`;
     })
   }
