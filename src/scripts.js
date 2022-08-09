@@ -78,9 +78,9 @@ function populatePastBookings() {
   bookingsWithRoomInfo.forEach(booking => {
     count++;
     pastBookingsContainer.innerHTML += `
-    <section class ='booking-box'>
-      <p class='booking-info'>Booking ${count}</p>
-      <button class='booking-info'>${booking}</button>
+    <section role='gridcell' class='booking-box'>
+      <p tabindex='0' class='booking-info'>Booking ${count}</p>
+      <p tabindex='0' class='booking-info'>${booking}</p>
     </section>`
   })
 }
@@ -98,9 +98,9 @@ function populateFutureBookings() {
   bookingsWithRoomInfo.forEach(booking => {
     count++
     futureBookingsContainer.innerHTML += `
-    <section class ='booking-box'>
-      <p class='booking-info'>Booking ${count}</p>
-      <button class='booking-info'>${booking}</button>
+    <section role='gridcell' class='booking-box'>
+      <p tabindex='0' class='booking-info'>Booking ${count}</p>
+      <p tabindex='0' class='booking-info'>${booking}</p>
     </section>`
   })
 }
@@ -130,12 +130,12 @@ function populateAvailableRooms() {
 
     availableRoomStrings.forEach(string => {
       let parsedID = parseInt(string.substring(6, 9));
-      filteredContainer.innerHTML += `<section class='booking-box'>
-        <button class='booking-info'>${string}</button>
-        <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
+      filteredContainer.innerHTML += `<section role='gridcell' class='booking-box'>
+        <p tabindex='0' class='booking-info'>${string}</p>
+        <img tabindex='0' class='checkmark' id=${parsedID} src='./assets/checkmark.png' alt='green-checkmark-to-click'
       </section>`;
       instructionsBox.innerHTML = '';
-      instructionsBox.innerHTML += '<p class="instructions">Click a green checkmark to book a room!</p>';
+      instructionsBox.innerHTML += '<p tabindex="0" class="instructions">Click a green checkmark to book a room!</p>';
     })
   }
 }
@@ -163,9 +163,9 @@ function populateFilteredRooms() {
 
     filteredRoomStrings.forEach(string => {
       let parsedID = parseInt(string.substring(6, 9));
-      filteredContainer.innerHTML += `<section class='booking-box'>
-        <button class='booking-info'>${string}</button>
-        <img class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
+      filteredContainer.innerHTML += `<section role='gridcell' class='booking-box'>
+        <p tabindex='0' class='booking-info'>${string}</p>
+        <img tabindex='0' class='checkmark' id=${parsedID} src='./assets/checkmark.png'>
       </section>`;
     })
   }
