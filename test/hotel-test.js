@@ -8,12 +8,14 @@ import customers from '../src/mockData/mock-bookings'
 describe('Hotel', () => {
 
 let hotel;
+let hotel2;
 
   beforeEach( () => {
     hotel = new Hotel(0, rooms, bookings);
+    hotel2 = new Hotel(1, rooms, bookings)
   })
 
-  it('Should be an instantiation of Hotel', () => {
+  it('Should be an instance of Hotel', () => {
     expect(hotel).to.be.an.instanceOf(Hotel);
   })
 
@@ -56,17 +58,30 @@ let hotel;
     expect(pastBookings1[3].date).to.equal('2022/01/26')
   })
 
+  it('should return formatted strings of information on the room associated with the past booking', () => {
+    expect(hotel.returnPastBookingRoomInfo()[0].substring(0, 16)).to.equal('Date: 2022/02/05');
+    expect(hotel.returnPastBookingRoomInfo()[0].substring(18, 26)).to.equal('Room: 12');
+    expect(hotel.returnPastBookingRoomInfo()[0].substring(28, 50)).to.equal('Room Type: single room')
+  })
+
   it('Should be able to return future bookings for a customer', () => {
     let futureBookings1 = hotel.returnFutureBookings();
     expect(futureBookings1.every(booking => booking.userID === 1)).to.equal(true)
-    expect(futureBookings1[0].date).to.equal('2023/01/11')
-    expect(futureBookings1[1].date).to.equal('2022/11/06')
-    expect(futureBookings1[2].date).to.equal('2023/12/22')
-    expect(futureBookings1[3].date).to.equal('2023/02/12')
+    expect(futureBookings1[0].date).to.equal('2023/01/11');
+    expect(futureBookings1[1].date).to.equal('2022/11/06');
+    expect(futureBookings1[2].date).to.equal('2023/12/22');
+    expect(futureBookings1[3].date).to.equal('2023/02/12');
+  })
+
+  it('should return formatted strings of information on the room associated with the future booking', () => {
+    expect(hotel.returnFutureBookingRoomInfo()[0].substring(0, 16)).to.equal('Date: 2023/01/11');
+    expect(hotel.returnFutureBookingRoomInfo()[0].substring(18, 26)).to.equal('Room: 20');
+    expect(hotel.returnFutureBookingRoomInfo()[0].substring(28, 56)).to.equal('Room Type: residential suite');
   })
 
   it("Should be able return the total amount a customer has spent on bookings.", () => {
-    expect(hotel.returnTotalAmountSpent()).to.equal(8806)
+    expect(hotel.returnTotalAmountSpent()).to.equal(8806);
+    expect(hotel2.returnTotalAmountSpent()).to.equal(7557);
   })
 
   it('Should be able to return all rooms available on a selected date', () => {
@@ -76,7 +91,7 @@ let hotel;
 
   })
 
-  it('should be able to tell the user if the date they enter is invalid', () => {
+  it('should be able to tell the user if the date they enter is in the past or has no available rooms', () => {
     expect(hotel.showRoomsByDate('2022/04/22')).to.equal('Sorry! Either this is a past date or no rooms are available. Please try again.');
   })
 
@@ -89,6 +104,7 @@ let hotel;
 
   it('should be able to tell the user if a desired room type is invalid', () => {
     hotel.showRoomsByDate('2023/01/08');
+    expect(hotel.showRoomsByType('')).to.equal('Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.')
     expect(hotel.showRoomsByType('thunderdome')).to.equal('Sorry! This is not a valid room type (suite, junior suite, residential suite, single bedroom). Please try again.')
   })
 

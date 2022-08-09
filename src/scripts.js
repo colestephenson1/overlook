@@ -13,15 +13,13 @@ const seeFutureBookingsButton = document.querySelector('.toggle-bookings-button2
 const seePastBookingsButton = document.querySelector('.toggle-bookings-button1');
 const futureBookingsContainer = document.querySelector('.future-bookings-container');
 const pastBookingsContainer = document.querySelector('.past-bookings-container');
-const dateSearchInput = document.querySelector('.dates-search-input');
 const checkDatesButton = document.querySelector('.check-dates-button');
 const filteredContainer = document.querySelector('.filtered-bookings-container');
-const searchByDateInput= document.querySelector('.dates-search-input');
-const navBarInstructions = document.querySelector('.instructions');
+const searchByDateInput = document.querySelector('.dates-search-input');
 const navBar = document.querySelector('.nav-bar');
 const searchRoomTypeButton = document.querySelector('.search-room-type-button');
-const searchRoomInputBox= document.querySelector('.search-room-input-box');
-const searchByRoomTypeInput= document.querySelector('.room-search-input');
+const searchRoomInputBox = document.querySelector('.search-room-input-box');
+const searchByRoomTypeInput = document.querySelector('.room-search-input');
 const homeButton = document.querySelector('.home-button');
 const instructionsBox = document.querySelector('.instructions-box');
 const loginContainer = document.querySelector('.login-container');
@@ -62,7 +60,7 @@ checkDatesButton.addEventListener('click', seeFilteredBookings);
 searchRoomTypeButton.addEventListener('click', populateFilteredRooms);
 homeButton.addEventListener('click', seeUpdatedFutureBookings);
 filteredContainer.addEventListener('click', checkForCheckmark);
-loginButton.addEventListener('click', login)
+loginButton.addEventListener('click', login);
 
 // ***** Functions *****
 
@@ -70,7 +68,7 @@ loginButton.addEventListener('click', login)
 
 function populatePastBookings() {
   const bookingsWithRoomInfo = hotel.returnPastBookingRoomInfo();
-  instructionsBox.innerHTML = ''
+  instructionsBox.innerHTML = '';
   instructionsBox.innerHTML += `<p class='instructions'>Click the Button below to Toggle between your Past and Future Bookings!</p>
   <p class='instructions'>Or, Search for a Date to Book with the Button on the Right!</p>`;
   pastBookingsContainer.innerHTML  = '';
@@ -106,8 +104,8 @@ function populateFutureBookings() {
 }
 
 function populateAvailableRooms() {
-  let rejoinedDate = searchByDateInput.value.split('-').join('/')
-  const availableRooms = hotel.showRoomsByDate(rejoinedDate)
+  let rejoinedDate = searchByDateInput.value.split('-').join('/');
+  const availableRooms = hotel.showRoomsByDate(rejoinedDate);
   desiredDate = rejoinedDate;
   filteredContainer.innerHTML = '';
   if (availableRooms === 'Sorry! Either this is a past date or no rooms are available. Please try again.') {

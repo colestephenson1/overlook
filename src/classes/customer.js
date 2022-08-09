@@ -1,6 +1,3 @@
-import bookings from '../mockData/mock-bookings';
-import rooms from '../mockData/mock-rooms';
-
 class Customer {
   constructor(customer) {
     this.id = customer.id;
