@@ -7,12 +7,10 @@ describe('Customer', () => {
 
 let customer;
 let customer2;
-let splitCurrentDate;
 
   beforeEach( () => {
     customer = new Customer(customers[0]);
     customer2 = new Customer(customers[1]);
-    splitCurrentDate = new Date().toJSON().slice(0, 10);
   })
 
   it('Should be an instance of Customer', () => {
@@ -21,6 +19,7 @@ let splitCurrentDate;
 
   it('Should start with no amount spent before checking past bookings', () => {
     expect(customer.amountSpent).to.equal(0);
+    expect(customer2.amountSpent).to.equal(0);
   })
 
 })
