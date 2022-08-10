@@ -47,7 +47,7 @@ function getPromiseData() {
     bookingsData = data[1].bookings;
     customerData = data[2].customers;
     customer = new Customer(customerData[1]);
-    hotel = new Hotel(2, roomData, bookingsData);
+    hotel = new Hotel(1, roomData, bookingsData);
   })
 }
 
